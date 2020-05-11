@@ -3,7 +3,7 @@ require('dotenv').config();
 
 
 const getAll = (req, res) => {
-    Domain.find({"orgId": req.param('ordId') }).then(domains => {
+    Domain.find({"orgId": req.param('orgId') }).then(domains => {
         res.status(200)
             .json({
                 status: 200,
