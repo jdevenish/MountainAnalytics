@@ -10,18 +10,13 @@ let userObj = {
 };
 
 function BrowserDetection() {
-    //Check if browser is IE
     if (navigator.userAgent.search("MSIE")>0) {
-        // insert conditional IE code here
         userObj.deviceType = "IE"
     }else if (navigator.userAgent.search("Chrome")>0) {
-        // insert conditional Chrome code here
         userObj.deviceType= "Chrome"
     }else if (navigator.userAgent.search("Firefox")>0) {
-        // insert conditional Firefox Code here
         userObj.deviceType="Firefox"
     }else if (navigator.userAgent.search("Safari")>0 && navigator.userAgent.search("Chrome") < 0) {
-        // insert conditional Safari code here
         userObj.deviceType = "Safari"
     }else {
         userObj.deviceType = "Other"
