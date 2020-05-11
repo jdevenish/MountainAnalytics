@@ -29,6 +29,8 @@ app.use("/user", userRoutes);
 const domainRoutes = require("./routes/domain");
 app.use("/domains", domainRoutes);
 
+const rawDataRoutes = require("./routes/rawdata");
+app.use("/data", rawDataRoutes);
 
 // Set the port and configure server to listen on that port
 app.set('port', PORT);
