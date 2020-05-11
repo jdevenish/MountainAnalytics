@@ -1,4 +1,6 @@
 const Auth = require("../models/Auth");
+const User = require("../models/User");
+const Org = require("../models/Organization");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -28,21 +30,17 @@ const isValid = (req, res) => {
 };
 
 const registerNewUser = (req, res) => {
-    Auth.create(req.body).then(auth =>{
+    const newCreds = {
+        email: req.body.email,
+        password: req.body.password
+    };
+    Auth.create(newCreds).then(auth =>{
         const newUser = {
-            userId: auth.email,
-            targetCompanies: [],
-            networkingContacts: [],
-            jobSearchMaterials: {
-                brandStatement: "",
-                coverLetter: "",
-                resume: "",
-                gitHub: "",
-                linkedIn: "",
-                repl: "",
-                codeSandBox: "",
-                profileSite: ""
-            }
+            email: auth.email,
+            password: auth.password,
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            is_Admin: true
         };
         const token = jwt.sign({email: auth.email}, secret, {
             expiresIn: '1h'
