@@ -1,7 +1,7 @@
 const RawData = require("../models/RawData");
 
 const addData = (req, res) => {
-    RawData.create(req.body).then(() => {
+    RawData.create(JSON.parse(req.body)).then(() => {
         res.status(201).json({
             status: 201
         })
