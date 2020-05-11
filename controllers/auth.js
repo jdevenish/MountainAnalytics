@@ -34,28 +34,41 @@ const registerNewUser = (req, res) => {
         email: req.body.email,
         password: req.body.password
     };
+
     Auth.create(newCreds).then(auth =>{
-        const newUser = {
-            email: auth.email,
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
-            is_Admin: true
-        };
-        const token = jwt.sign({email: auth.email}, secret, {
-            expiresIn: '1h'
-        });
-        User.create(newUser).then(user => {
-            res.status(200).json({
-                status: 200,
-                token: token,
-                userProfile: user
+
+        Org.findById(req.body.orgId).then(org => {
+            const newUser = {
+                email: auth.email,
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                is_Admin: false,
+                org: org
+            };
+            const token = jwt.sign({email: auth.email}, secret, {
+                expiresIn: '1h'
+            });
+
+            User.create(newUser).then(user => {
+                res.status(200).json({
+                    status: 200,
+                    token: token,
+                    userProfile: user
+                })
+            }).catch(err => {
+                res.status(200)
+                    .json({
+                        status: 500,
+                        error: "Error creating user profile.",
+                        user: newUser,
+                        err: err
+                    });
             })
         }).catch(err => {
             res.status(200)
                 .json({
                     status: 500,
-                    error: "Error creating user profile.",
-                    user: newUser,
+                    error: "Can't find matching organization.",
                     err: err
                 });
         })

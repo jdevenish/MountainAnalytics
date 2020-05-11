@@ -1,15 +1,12 @@
 const Auth = require("../models/Auth");
 const User = require("../models/User");
 const Org = require("../models/Organization");
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const secret = process.env.SECRET;
 
 
 const registerNewOrg = (req, res) => {
-
-
     const newOrg = {
         name: req.body.orgName,
         createdOn: new Date()
@@ -52,13 +49,11 @@ const registerNewOrg = (req, res) => {
             res.status(200)
                 .json({
                     status: 500,
-                    error: "Error registering new user please try again.",
+                    error: "Error registering new credentials. Please contact your admin.",
                     requestBody: req.body,
                     err: err
                 });
         });
-
-
     }).catch(err => {
         res.status(200)
             .json({
@@ -68,9 +63,26 @@ const registerNewOrg = (req, res) => {
                 err: err
             });
     })
+};
 
+const updateOrgName = (req, res) => {
+    res.status(200)
+        .json({
+            status: 500,
+            error: "Endpoint not finished"
+        });
+};
+
+const deleteOrg = (req, res) => {
+    res.status(200)
+        .json({
+            status: 500,
+            error: "Endpoint not finished",
+        });
 };
 
 module.exports = {
-    registerNewOrg
+    registerNewOrg,
+    updateOrgName,
+    deleteOrg
 };
