@@ -23,6 +23,9 @@ app.use("/api", authRoutes);
 const orgRoutes = require("./routes/organization");
 app.use("/org", orgRoutes);
 
+const userRoutes = require("./routes/user");
+app.user("/user", userRoutes);
+
 const domainRoutes = require("./routes/domain");
 app.use("/domains", domainRoutes);
 
