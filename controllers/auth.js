@@ -85,8 +85,6 @@ const authenticateCredentials = (req, res) => {
 };
 
 const deleteAccount = (req, res) => {
-    // res.setHeader("Access-Control-Allow-Origin", "https://seirproj3jobtracker.netlify.app");
-    console.log("Deleting account for : ", req.email)
     Auth.deleteOne({ email: req.email }).then(ackAuth => {
         if(ackAuth.deletedCount < 1){
             res.status(200).json({

@@ -1,11 +1,5 @@
-const Auth = require("../models/Auth");
-const User = require("../models/User");
-const Org = require("../models/Organization");
 const Domain = require("../models/Domain");
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const secret = process.env.SECRET;
 
 
 const getAll = (req, res) => {
