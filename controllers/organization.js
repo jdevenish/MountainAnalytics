@@ -69,7 +69,7 @@ const updateOrgName = (req, res) => {
     res.status(200)
         .json({
             status: 500,
-            error: "Endpoint not finished"
+            error: "Update Org Name API not finished"
         });
 };
 
@@ -77,7 +77,7 @@ const deleteOrg = (req, res) => {
     res.status(200)
         .json({
             status: 500,
-            error: "Endpoint not finished",
+            error: "Delete Org API not finished",
         });
 };
 

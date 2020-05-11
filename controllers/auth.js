@@ -29,61 +29,6 @@ const isValid = (req, res) => {
     });
 };
 
-const registerNewUser = (req, res) => {
-    const newCreds = {
-        email: req.body.email,
-        password: req.body.password
-    };
-
-    Auth.create(newCreds).then(auth =>{
-
-        Org.findById(req.body.orgId).then(org => {
-            const newUser = {
-                email: auth.email,
-                first_name: req.body.first_name,
-                last_name: req.body.last_name,
-                is_Admin: false,
-                org: org
-            };
-            const token = jwt.sign({email: auth.email}, secret, {
-                expiresIn: '1h'
-            });
-
-            User.create(newUser).then(user => {
-                res.status(200).json({
-                    status: 200,
-                    token: token,
-                    userProfile: user
-                })
-            }).catch(err => {
-                res.status(200)
-                    .json({
-                        status: 500,
-                        error: "Error creating user profile.",
-                        user: newUser,
-                        err: err
-                    });
-            })
-        }).catch(err => {
-            res.status(200)
-                .json({
-                    status: 500,
-                    error: "Can't find matching organization.",
-                    err: err
-                });
-        })
-    }).catch(err =>{
-        res.status(200)
-            .json({
-                status: 500,
-                error: "Error registering new user please try again.",
-                requestBody: req.body,
-                err: err
-            });
-    });
-
-};
-
 const authenticateCredentials = (req, res) => {
     // res.setHeader("Access-Control-Allow-Origin", "https://seirproj3jobtracker.netlify.app")
     const { email, password } = req.body;
@@ -177,7 +122,6 @@ const deleteAccount = (req, res) => {
 };
 
 module.exports = {
-    registerNewUser,
     authenticateCredentials,
     isValid,
     deleteAccount
