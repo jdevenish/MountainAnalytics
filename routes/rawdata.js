@@ -3,9 +3,8 @@ const router = express.Router();
 const rawdataController = require("../controllers/rawdataController");
 
 
-// Update user's profile
+router.get('/', rawdataController.getData);
+
 router.post('/create', rawdataController.addData);
-
-
 
 module.exports = router;

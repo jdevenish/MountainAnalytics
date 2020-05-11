@@ -1,17 +1,6 @@
 const RawData = require("../models/RawData");
 
 const addData = (req, res) => {
-    // const newData = {
-    //     siteId: req.body.siteId,
-    //     loadTime: req.body.loadTime,
-    //     screenWidth: req.body.screenWidth,
-    //     deviceType: req.body.deviceType,
-    //     geolocation: {
-    //         lat: req.body.geolocation.lat,
-    //         long: req.body.geolocation.long
-    //     }
-    // };
-
     RawData.create(req.body).then(() => {
         res.status(201).json({
             status: 201
@@ -25,6 +14,24 @@ const addData = (req, res) => {
     })
 };
 
+const getData = (req, res) => {
+    RawData.find({"siteId": req.param('siteId')}).then(data => {
+        res.status(200)
+            .json({
+                status: 200,
+                data: data
+            });
+    }).catch(err => {
+        res.status(200)
+            .json({
+                status: 500,
+                error: "Can't retrieve data",
+                err: err
+            });
+    });
+};
+
 module.exports = {
-    addData
+    addData,
+    getData
 };

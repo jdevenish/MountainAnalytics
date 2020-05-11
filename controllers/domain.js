@@ -1,4 +1,5 @@
 const Domain = require("../models/Domain");
+const Metric = require("../models/Metrics");
 require('dotenv').config();
 
 
@@ -29,17 +30,52 @@ const createNew = (req, res) => {
     };
 
     Domain.create(newDomain).then(domain => {
-        Domain.find({"orgId": domain.orgId }).then(domains => {
-            res.status(200)
-                .json({
-                    status: 200,
-                    domains: domains
-                })
+
+        const newMetric = {
+            domainId: domain._id,
+            loadTimes: {
+                high: 0,
+                low: 0,
+                avg: 0,
+                data: {
+                    time: []
+                }
+            },
+            browser: {
+                chrome: 0,
+                firefox: 0,
+                safari: 0,
+                ie: 0,
+                other: 0
+            },
+            deviceType: {
+                mobile: 0,
+                tablet: 0,
+                desktop: 0
+            },
+            location: []
+        };
+        Metric.create(newMetric).then(metric => {
+
+            Domain.find({"orgId": domain.orgId }).then(domains => {
+                res.status(200)
+                    .json({
+                        status: 200,
+                        domains: domains
+                    })
+            }).catch(err => {
+                res.status(200)
+                    .json({
+                        status: 500,
+                        message: "Error retrieving domains after creating",
+                        error: err
+                    })
+            })
         }).catch(err => {
             res.status(200)
                 .json({
                     status: 500,
-                    message: "Error retrieving domains after creating",
+                    message: "Error creating Metrics object",
                     error: err
                 })
         })
