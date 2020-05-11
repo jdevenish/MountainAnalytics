@@ -4,7 +4,8 @@ const userController = require("../controllers/user");
 const withAuth = require('../middleware');
 
 // Update user's profile
-router.put('/update', withAuth, userController.updateProfile);
+router.post('/register', userController.registerNewUser);
+
 
 
 module.exports = router;
