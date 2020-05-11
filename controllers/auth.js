@@ -37,7 +37,6 @@ const registerNewUser = (req, res) => {
     Auth.create(newCreds).then(auth =>{
         const newUser = {
             email: auth.email,
-            password: auth.password,
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             is_Admin: true
