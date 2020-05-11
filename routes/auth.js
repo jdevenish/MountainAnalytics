@@ -8,7 +8,7 @@ const withAuth = require('../middleware');
 router.get('/checkToken', withAuth, authController.isValid);
 
 // Register new user
-router.post('/register', authController.registerNewUser);
+// router.post('/register', authController.registerNewUser);
 
 // Authenticate user on login
 router.post('/authenticate', authController.authenticateCredentials);
