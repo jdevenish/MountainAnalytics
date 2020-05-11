@@ -39,8 +39,10 @@ window.onload = function () {
     userObj.loadTime = window.performance.timing.domContentLoadedEventEnd-window.performance.timing.navigationStart;
     userObj.screenWidth = screen.width;
     BrowserDetection();
-};
 
-let sendToMA = new XMLHttpRequest();
-sendToMA.open('POST', "https://mountain-analytics.herokuapp.com/data/create", true);
-sendToMA.send(userObj);
+    let sendToMA = new XMLHttpRequest()
+    sendToMA.open('POST', "https://mountain-analytics.herokuapp.com/data/create", true)
+    sendToMA.setRequestHeader("Content-Type", "application/json");
+    sendToMA.setRequestHeader("Access-Control-Allow-Origin", "*");
+    sendToMA.send(JSON.stringify(userObj))
+};

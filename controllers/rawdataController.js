@@ -1,18 +1,18 @@
 const RawData = require("../models/RawData");
 
 const addData = (req, res) => {
-    const newData = {
-        siteId: req.body.siteId,
-        loadTime: req.body.loadTime,
-        screenWidth: req.body.screenWidth,
-        deviceType: req.body.deviceType,
-        geolocation: {
-            lat: req.body.geolocation.lat,
-            long: req.body.geolocation.long
-        }
-    };
+    // const newData = {
+    //     siteId: req.body.siteId,
+    //     loadTime: req.body.loadTime,
+    //     screenWidth: req.body.screenWidth,
+    //     deviceType: req.body.deviceType,
+    //     geolocation: {
+    //         lat: req.body.geolocation.lat,
+    //         long: req.body.geolocation.long
+    //     }
+    // };
 
-    RawData.create(newData).then(() => {
+    RawData.create(req.body).then(() => {
         res.status(201).json({
             status: 201
         })
