@@ -20,8 +20,8 @@ app.get("/", (req, res) => {
 const authRoutes = require("./routes/auth");
 app.use("/api", authRoutes);
 
-// const orgRoutes = require("./routes/organization");
-// app.use("/org", )
+const orgRoutes = require("./routes/organization");
+app.use("/org", orgRoutes)
 
 
 // Set the port and configure server to listen on that port
