@@ -31,6 +31,7 @@ const getForDomain = (req, res) => {
                     default:
                         metric.browser.other +=1;
                 }
+                console.log("Made it past browser")
 
                 // Device Type
                 const screenWidth = site.screenWidth;
@@ -41,6 +42,7 @@ const getForDomain = (req, res) => {
                 } else if(screenWidth >= 1024){
                     metric.deviceType.deskTop += 1;
                 }
+                console.log("Made it past deviceType")
 
                 // Load Times
                 metric.loadTimes.data.time.push(site.loadTime);
@@ -54,6 +56,7 @@ const getForDomain = (req, res) => {
                 } else if(site.loadTime < metric.loadTimes.low && site.loadTime > 0){
                     metric.loadTimes.low = site.loadTime
                 }
+                console.log("Made it past load times")
 
                 // Locale
                 if(site.geolocation.lat !== 0 && site.geolocation.long !== 0){
