@@ -32,6 +32,9 @@ app.use("/domains", domainRoutes);
 const rawDataRoutes = require("./routes/rawdata");
 app.use("/data", rawDataRoutes);
 
+const metricRoutes = require("./routes/metrics");
+app.use("/metrics", metricRoutes);
+
 // Set the port and configure server to listen on that port
 app.set('port', PORT);
 app.listen(app.get('port'), () => console.log(`PORT: ${app.get("port")} 🌟`));

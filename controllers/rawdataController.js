@@ -5,6 +5,7 @@ const addData = (req, res) => {
         res.status(201).json({
             status: 201
         })
+
     }).catch(err => {
         res.status(200)
             .json({
