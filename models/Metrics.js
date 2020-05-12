@@ -16,14 +16,14 @@ const MetricSchema = new mongoose.Schema({
     browser: {
         chrome: Number,
         firefox: Number,
-        Safari: Number,
+        safari: Number,
         ie: Number,
         other: Number,
     },
     deviceType: {
         mobile: Number,
         tablet: Number,
-        deskTop: Number
+        desktop: Number
     },
     location: [
         {

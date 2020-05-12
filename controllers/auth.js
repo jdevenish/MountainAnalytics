@@ -51,7 +51,6 @@ const authenticateCredentials = (req, res) => {
                     const token = jwt.sign(payload, secret, {
                         expiresIn: '1h'
                     });
-                    console.log("Trying to find user: ", auth.email);
                     User.findOne({"email": auth.email}).then(user => {
                         if(!user){
                             res.status(200).json({

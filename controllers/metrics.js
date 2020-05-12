@@ -8,33 +8,26 @@ const getForDomain = (req, res) => {
     Metric.findOne({"domainId": req.param('domainId') }).then(metric => {
         console.log("Found metric object for this domain")
         RawData.find({ "siteId": req.param('domainId') }).then(data => {
-            console.log("Found raw data for domain");
-            console.log(data)
-            data.forEach((site, index) => {
-                console.log(site)
-                console.log(metric)
+            data.forEach((site) => {
                 // Browser
                 switch (site.deviceType) {
                     case "Firefox":
                         metric.browser.firefox += 1;
                         break;
                     case "Chrome":
-                        console.log("Found Chrome")
-                        metric.browser.chrome = metric.browser.chrome + 1;
-                        console.log("Updated metric")
+                        metric.browser.chrome += 1;
                         break;
                     case "Safari":
-                        metric.browser.Safari +=1;
+                        metric.browser.safari += 1;
                         break;
                     case "IE":
-                        metric.browser.ie +=1;
+                        metric.browser.ie += 1;
                         break;
                     case "":
                         break;
                     default:
-                        metric.browser.other +=1;
+                        metric.browser.other += 1;
                 }
-                console.log("Made it past browser")
 
                 // Device Type
                 const screenWidth = site.screenWidth;
@@ -45,7 +38,6 @@ const getForDomain = (req, res) => {
                 } else if(screenWidth >= 1024){
                     metric.deviceType.deskTop += 1;
                 }
-                console.log("Made it past deviceType")
 
                 // Load Times
                 metric.loadTimes.data.time.push(site.loadTime);
@@ -59,7 +51,6 @@ const getForDomain = (req, res) => {
                 } else if(site.loadTime < metric.loadTimes.low && site.loadTime > 0){
                     metric.loadTimes.low = site.loadTime
                 }
-                console.log("Made it past load times")
 
                 // Locale
                 if(site.geolocation.lat !== 0 && site.geolocation.long !== 0){
@@ -71,8 +62,6 @@ const getForDomain = (req, res) => {
             });
             metric.loadTimes.avg = metric.loadTimes.avg / data.length;
 
-            console.log("Compiled Data");
-            console.log(metric);
             res.status(200)
                 .json({
                     status: 200,
