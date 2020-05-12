@@ -79,7 +79,15 @@ const createNew = (req, res) => {
                     error: err
                 })
         })
-    });
+    }).catch(err => {
+        res.status(200)
+            .json({
+                status: 500,
+                message: "Error creating domain",
+                err: err
+            })
+
+    })
 };
 
 const remove = (req, res) => {
