@@ -18,7 +18,9 @@ const getForDomain = (req, res) => {
                         metric.browser.firefox += 1;
                         break;
                     case "Chrome":
+                        console.log("Found Chrome")
                         metric.browser.chrome +=1;
+                        console.log("Updated metric")
                         break;
                     case "Safari":
                         metric.browser.Safari +=1;
