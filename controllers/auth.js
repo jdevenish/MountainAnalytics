@@ -13,7 +13,9 @@ const isValid = (req, res) => {
     const token = jwt.sign(payload, secret, {
         expiresIn: '1h'
     });
-    User.findOne({"userId": req.email}).then(user => {
+    console.log("payload - ", payload)
+    User.findOne(payload).then(user => {
+        console.log(user)
         res.status(200).json({
             status: 200,
             token: token,
@@ -30,7 +32,6 @@ const isValid = (req, res) => {
 };
 
 const authenticateCredentials = (req, res) => {
-    // res.setHeader("Access-Control-Allow-Origin", "https://seirproj3jobtracker.netlify.app")
     const { email, password } = req.body;
     Auth.findOne({ email: req.body.email }).then(auth => {
         if (!auth) {
