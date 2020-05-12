@@ -13,9 +13,7 @@ const isValid = (req, res) => {
     const token = jwt.sign(payload, secret, {
         expiresIn: '1h'
     });
-    console.log("payload - ", payload)
     User.findOne(payload).then(user => {
-        console.log(user)
         res.status(200).json({
             status: 200,
             token: token,
@@ -54,7 +52,7 @@ const authenticateCredentials = (req, res) => {
                         expiresIn: '1h'
                     });
                     console.log("Trying to find user: ", auth.email);
-                    User.findOne({"userId": auth.email}).then(user => {
+                    User.findOne({"email": auth.email}).then(user => {
                         if(!user){
                             res.status(200).json({
                                 status: 401,
