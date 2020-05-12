@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const getForDomain = (req, res) => {
     Metric.find({"domainId": req.param('domainId') }).then(metric => {
-
+        console.log("Found metric object for this domain")
         RawData.find({ "domainId": req.param('domainId') }).then(data => {
             data.forEach((site, index) => {
                 // Browser
@@ -60,8 +60,10 @@ const getForDomain = (req, res) => {
                     })
                 }
             });
-            metric.loadTimes.avg = metric.loadTimes.avg / data.length
+            metric.loadTimes.avg = metric.loadTimes.avg / data.length;
 
+            console.log("Compiled Data");
+            console.log(metric);
             res.status(200)
                 .json({
                     status: 200,
