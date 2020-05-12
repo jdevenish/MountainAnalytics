@@ -8,7 +8,9 @@ const getForDomain = (req, res) => {
     Metric.find({"domainId": req.param('domainId') }).then(metric => {
         console.log("Found metric object for this domain")
         RawData.find({ "domainId": req.param('domainId') }).then(data => {
+            console.log("Found raw data for domain");
             data.forEach((site, index) => {
+                console.log(site)
                 // Browser
                 switch (site.deviceType) {
                     case "Firefox":
