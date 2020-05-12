@@ -36,7 +36,7 @@ const getForDomain = (req, res) => {
                 } else if(768 <= screenWidth && screenWidth < 1024 ){
                     metric.deviceType.tablet += 1;
                 } else if(screenWidth >= 1024){
-                    metric.deviceType.deskTop += 1;
+                    metric.deviceType.desktop += 1;
                 }
 
                 // Load Times
