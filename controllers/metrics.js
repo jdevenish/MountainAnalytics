@@ -12,6 +12,7 @@ const getForDomain = (req, res) => {
             console.log(data)
             data.forEach((site, index) => {
                 console.log(site)
+                console.log(metric)
                 // Browser
                 switch (site.deviceType) {
                     case "Firefox":
