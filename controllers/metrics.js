@@ -6,7 +6,6 @@ require('dotenv').config();
 
 const getForDomain = (req, res) => {
     Metric.findOne({"domainId": req.param('domainId') }).then(metric => {
-        console.log("Found metric object for this domain")
         RawData.find({ "siteId": req.param('domainId') }).then(data => {
             data.forEach((site) => {
                 // Browser

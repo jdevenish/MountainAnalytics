@@ -91,8 +91,8 @@ const createNew = (req, res) => {
 };
 
 const remove = (req, res) => {
-    Domain.deleteOne({"_id": req.body._id}).then(ack => {
-        Domain.find({"orgId": req.body.orgId }).then(domains => {
+    Domain.deleteOne({"_id": req.param('domainId')}).then(ack => {
+        Domain.find({"orgId": req.param('orgId')}).then(domains => {
             res.status(200)
                 .json({
                     status: 200,
